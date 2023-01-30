@@ -20,3 +20,4 @@ data/
 db.sqlite3
 init-letsencrypt.sh
 dhparam/
+__pycache__
