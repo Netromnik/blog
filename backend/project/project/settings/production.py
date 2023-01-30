@@ -1,6 +1,8 @@
 from .base import *
 from uuid import uuid4
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", str(uuid4()))
+from utils.get_secret import get_secret
+
+SECRET_KEY = get_secret("DJANGO_SECRET_KEY", str(uuid4()))
 
 DEBUG = False
 CSRF_TRUSTED_ORIGINS = ["localhost",]
@@ -48,7 +50,7 @@ LOGGING = {
 }
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-EMAIL_HOST = os.getenv("EMAIL_HOST", '')
-EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", False)
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", '')
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", '')
+EMAIL_HOST = get_secret("EMAIL_HOST", '')
+EMAIL_USE_TLS = get_secret("EMAIL_USE_TLS", False)
+EMAIL_HOST_USER = get_secret("EMAIL_HOST_USER", '')
+EMAIL_HOST_PASSWORD = get_secret("EMAIL_HOST_PASSWORD", '')
