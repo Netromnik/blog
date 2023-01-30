@@ -8,6 +8,7 @@ services:
     volumes:
       - /www/media:/media:delegated,rw
       - /www/static:/static:delegated,rw
+      - ./backend/project:/app:r
     network_mode: host
     restart: on-failure
 
