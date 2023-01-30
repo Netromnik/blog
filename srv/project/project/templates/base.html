@@ -1,0 +1,59 @@
+{% load static wagtailcore_tags wagtailuserbar %}<!DOCTYPE html>
+<html lang="ru">
+    {% spaceless %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        {% block title %}
+        {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
+        {% endblock %}
+        {% block title_suffix %}
+        {% wagtail_site as current_site %}
+        {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
+        {% endblock %}
+    </title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {# Global stylesheets #}
+    {% block global_css %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}">
+    {% endblock %}
+    
+    {# Global javascript #}
+    {% block extra_css %}
+    {# Override this in templates to add extra stylesheets #}
+    {% endblock %}
+    {% block last_extra_js %}
+    {# Override this in templates to add extra javascript #}
+    {% endblock %}
+</head>
+    {% endspaceless %}
+<body class="flex flex-col min-h-screen justify-between">
+    {% wagtailuserbar %}
+    {% block header %}
+    {% include "header.html" %}
+    {% endblock %}
+
+    {% block space_line %}
+    <div class="h-4 info"></div>
+    {% endblock %}
+
+  <main class="mb-auto">
+    {% block content %}
+    {% endblock %}
+  </main>
+  <footer class="p-2 items-start mt-auto md:flex md:items-center md:justify-between md:p-6 ">
+    <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2022. All Rights Reserved.
+    </span>
+    <div class="flex items-center space-x-2"><svg width="30" height="18" fill="#16BDCA"><path fill-rule="evenodd" clip-rule="evenodd" d="M15 0c-4 0-6.5 2-7.5 6 1.5-2 3.25-2.75 5.25-2.25 1.141.285 1.957 1.113 2.86 2.03C17.08 7.271 18.782 9 22.5 9c4 0 6.5-2 7.5-6-1.5 2-3.25 2.75-5.25 2.25-1.141-.285-1.957-1.113-2.86-2.03C20.42 1.728 18.718 0 15 0zM7.5 9C3.5 9 1 11 0 15c1.5-2 3.25-2.75 5.25-2.25 1.141.285 1.957 1.113 2.86 2.03C9.58 16.271 11.282 18 15 18c4 0 6.5-2 7.5-6-1.5 2-3.25 2.75-5.25 2.25-1.141-.285-1.957-1.113-2.86-2.03C12.92 10.729 11.218 9 7.5 9z"></path></svg><p>Power of <!-- --> <a href="https://tailwindcss.com" class="font-medium text-gray-900 hover:text-gray-500 transition-colors duration-150">tailwindcss</a></p></div>
+    {% spaceless %}<ul class="flex flex-wrap items-center text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
+      {% include "footer_link.html" %}
+    </ul>{% endspaceless %}
+</footer>
+    {% block first_extra_js %}
+    {# Override this in templates to add extra javascript #}
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  blog:
+    build:
+      context: srv/
+    secrets:
+     - conf_secrets
+    volumes:
+      - /www/media:/media:delegated,rw
+      - /www/static:/static:delegated,rw
+    network_mode: host
+    restart: on-failure
+
+secrets: 
+  conf_secrets:
+    file: settings.conf
